@@ -1,13 +1,16 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseFilters, ParseIntPipe, ValidationPipe, UsePipes } from '@nestjs/common';
 import { EmployeeService } from './employee.service';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { UpdateEmployeeDto } from './dto/update-employee.dto';
+import { MongoExceptionFilter } from './filters/mongo-exception.filter';
+import { MongoIdValidationPipe } from './pipes/validation.pipe';
 
 @Controller('employee')
 export class EmployeeController {
-  constructor(private readonly employeeService: EmployeeService) {}
+  constructor(private readonly employeeService: EmployeeService) { }
 
   @Post()
+  @UseFilters(MongoExceptionFilter)
   create(@Body() createEmployeeDto: CreateEmployeeDto) {
     return this.employeeService.create(createEmployeeDto);
   }
@@ -18,17 +21,17 @@ export class EmployeeController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.employeeService.findOne(+id);
+  findOne(@Param('id', MongoIdValidationPipe) id: string) {
+    return this.employeeService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEmployeeDto: UpdateEmployeeDto) {
-    return this.employeeService.update(+id, updateEmployeeDto);
+  update(@Param('id', MongoIdValidationPipe) id: string, @Body() updateEmployeeDto: UpdateEmployeeDto) {
+    return this.employeeService.update(id, updateEmployeeDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.employeeService.remove(+id);
+  remove(@Param('id', MongoIdValidationPipe) id: string) {
+    return this.employeeService.remove(id);
   }
 }
