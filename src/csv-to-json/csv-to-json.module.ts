@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { CsvDbSaveService } from './csv-to-json.service';
+import { CsvToJsonService } from './csv-to-json.service';
 
 @Module({
-  providers: [CsvDbSaveService],
-  exports:[CsvDbSaveService]
+  providers: [CsvToJsonService],
+  exports:[CsvToJsonService]
 })
-export class CsvDbSaveModule {}
+export class CsvToJsonModule {}

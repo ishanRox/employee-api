@@ -1,7 +1,7 @@
-import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
+import {  Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { CsvDbSaveService } from 'src/csv-to-json/csv-to-json.service';
+import { CsvToJsonService } from '../csv-to-json/csv-to-json.service';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { UpdateEmployeeDto } from './dto/update-employee.dto';
 import { Employee, EmployeeDocument } from './schemas/employee.schema';
@@ -11,7 +11,7 @@ export class EmployeeService {
   private readonly logger = new Logger(EmployeeService.name);
 
   constructor(@InjectModel(Employee.name) private readonly employeeModel: Model<EmployeeDocument>,
-    private readonly csvToDbService: CsvDbSaveService) { }
+    private readonly csvToDbService: CsvToJsonService) { }
 
 
   async create(createEmployeeDto: CreateEmployeeDto) {

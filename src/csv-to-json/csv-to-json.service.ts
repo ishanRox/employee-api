@@ -1,8 +1,8 @@
 import { Injectable, UnprocessableEntityException } from '@nestjs/common';
-import { Employee } from 'src/employee/schemas/employee.schema';
+import { Employee } from '../employee/schemas/employee.schema';
 
 @Injectable()
-export class CsvDbSaveService {
+export class CsvToJsonService {
     fs = require('fs');
     getStream = require('get-stream');
     parse = require('csv-parser');

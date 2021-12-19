@@ -4,13 +4,13 @@ import { EmployeeController } from './employee.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Employee, EmployeeSchema } from './schemas/employee.schema';
 import { MulterModule } from '@nestjs/platform-express';
-import { CsvDbSaveModule } from 'src/csv-to-json/csv-to-json.module';
-import { HttpModule } from '@nestjs/axios';
+import { CsvToJsonModule } from '../csv-to-json/csv-to-json.module';
+import 'dotenv/config';
 
 @Module({
-  imports: [HttpModule,CsvDbSaveModule, MulterModule.register({ 
+  imports: [CsvToJsonModule, MulterModule.register({ 
     limits: {
-      fileSize: 5000000
+      fileSize: +process.env.MAX_FILE_SIZE
     }
   }), MongooseModule.forFeature([{ name: Employee.name, schema: EmployeeSchema }])],
   controllers: [EmployeeController],

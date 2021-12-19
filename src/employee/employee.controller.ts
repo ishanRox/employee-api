@@ -13,7 +13,7 @@ import { HttpService } from '@nestjs/axios';
 export class EmployeeController {
   private readonly logger:Logger = new Logger(EmployeeController.name);
 
-  constructor(private readonly employeeService: EmployeeService, private readonly httpService: HttpService) { }
+  constructor(private readonly employeeService: EmployeeService) { }
 
   @Post()
   @UseFilters(MongoExceptionFilter)
@@ -30,9 +30,9 @@ export class EmployeeController {
   }
 
   @Get()
-  findAll() {
+  async findAll() {
     this.logger.log(`get all employees endpoint called`);
-    return this.employeeService.findAll();
+    return await this.employeeService.findAll();
   }
 
   @Get(':id')
