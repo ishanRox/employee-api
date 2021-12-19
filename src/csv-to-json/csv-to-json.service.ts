@@ -7,7 +7,7 @@ export class CsvDbSaveService {
     getStream = require('get-stream');
     parse = require('csv-parser');
 
-    async saveCsvToMongoDb(fileInfo: Express.Multer.File) {
+    async csvToJson(fileInfo: Express.Multer.File) {
         try {
             let readCSVData = async (path): Promise<any> => {
                 const parseStream = this.parse({ delimiter: ',' });

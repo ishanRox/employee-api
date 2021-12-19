@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { CsvDbSaveService } from './csv-db-save.service';
+import { CsvDbSaveService } from './csv-to-json.service';
 
 @Module({
   providers: [CsvDbSaveService],

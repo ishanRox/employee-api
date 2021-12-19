@@ -1,8 +1,7 @@
 import { HttpException, HttpStatus } from "@nestjs/common";
 import { diskStorage } from "multer";
 import { extname } from "path/posix";
-
-let dest:string;
+import 'dotenv/config';
 
 export const multerCsvConfig ={
     limits: {
@@ -11,9 +10,7 @@ export const multerCsvConfig ={
     // Check the mimetypes to allow for upload
     fileFilter: (req: any, file: any, cb: any) => {
         if (file.originalname.match(/.*\.(csv)$/)) {
-            // Allow storage of file
-            console.log(process.env.DESTINATION_CSV,'dest');
-            dest= process.env.DESTINATION_CSV;
+            // Allow storage of file 
             cb(null, true);
         } else {
             // Reject file
@@ -21,7 +18,7 @@ export const multerCsvConfig ={
         }
     },
     storage: diskStorage({
-      destination: './upload/csv'
+      destination:process.env.DESTINATION_CSV
       , filename: (req, file, cb) => {
         // Generating a 32 random chars long string
         const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('')

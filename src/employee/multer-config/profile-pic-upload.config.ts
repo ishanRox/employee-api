@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus } from "@nestjs/common";
 import { diskStorage } from "multer";
 import { extname } from "path/posix";
+import 'dotenv/config';
 
 export const multerImageConfig = {
   limits: {
@@ -17,7 +18,7 @@ export const multerImageConfig = {
     }
   },
   storage: diskStorage({
-    destination:'./upload/profile-pic'
+    destination: process.env.DESTINATION_PROFILE_PIC
     , filename: (req, file, cb) => {
       // Generating a 32 random chars long string
       const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('')

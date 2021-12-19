@@ -4,7 +4,7 @@ import { EmployeeController } from './employee.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Employee, EmployeeSchema } from './schemas/employee.schema';
 import { MulterModule } from '@nestjs/platform-express';
-import { CsvDbSaveModule } from 'src/csv-db-save/csv-db-save.module';
+import { CsvDbSaveModule } from 'src/csv-to-json/csv-to-json.module';
 import { HttpModule } from '@nestjs/axios';
 
 @Module({

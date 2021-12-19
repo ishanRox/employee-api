@@ -8,11 +8,6 @@ export class MongoExceptionFilter implements ExceptionFilter {
     const response = ctx.getResponse();
 
     let message: string = 'Mongo Default Error';
-
-    console.log(exception.code,'exception.code')
-    console.log(exception.message,'exception.code')
-    console.log(exception.errmsg,'exception.code')
-
     switch (exception.code) {
       case 11000:
         response.statusCode = HttpStatus.CONFLICT;
