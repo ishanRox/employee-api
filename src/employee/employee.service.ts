@@ -1,4 +1,4 @@
-import {  Injectable, Logger, NotFoundException } from '@nestjs/common';
+import {  BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CsvToJsonService } from '../csv-to-json/csv-to-json.service';
@@ -55,6 +55,7 @@ export class EmployeeService {
     const result = Promise.allSettled(employeeCreateRequests);
     return result;
   }
+ 
 
   async updateProfilePic(file: Express.Multer.File, userId: string) {
     const employee: Employee = await this.employeeModel.findByIdAndUpdate(userId,
