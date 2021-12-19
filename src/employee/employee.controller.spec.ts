@@ -77,5 +77,26 @@ describe('EmployeeController', () => {
     });
   });
 
-  
+  describe('findOne', () => {
+    it('should return an array of employees', async () => {
+      const emp = {
+        "profilePicture": "",
+        "linkedInProfile": "https://www.linkedin.com/in/ishan-vimukthi-b4a128173/",
+        "workPhone": "+94115628989",
+        "workEmail": "ab@gmail.com",
+        "designation": "se",
+        "description": "hi im ish",
+        "location": "colombo",
+        "gender": "male",
+        "preferredName": "ish",
+        "lastName": "vimukthi",
+        "firstName": "ishan yalu",
+
+      };
+      jest.spyOn(employeeService, 'findOne').mockReturnValue(Promise.resolve(emp)
+      );
+      employeeService.findOne("");
+      expect(await controller.findAll());
+    });
+  });
 });
